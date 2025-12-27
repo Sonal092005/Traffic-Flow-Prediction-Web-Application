@@ -85,9 +85,9 @@ This project demonstrates how deep learning (LSTM) and machine learning can turn
 MIT License
 
 Team Members :
-    SALILA S P
-    SONAL M Sangapur 
-    SWATI J Sajjan
+    SALILA S PUNNESHETTY
+    SONAL M SANGAPUR
+    SWATI J SAJJAN
 
 Information Science Engineering Student,
 PDA College of Engineering
