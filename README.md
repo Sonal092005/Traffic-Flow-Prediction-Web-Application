@@ -71,10 +71,8 @@ This project demonstrates how deep learning (LSTM) and machine learning can turn
 - Can deploy to the cloud or a local server
 
 ## OUTPUT
-<img width="1827" height="855" alt="Screenshot 2025-12-27 155915" src="https://github.com/user-attachments/assets/529a8806-4d55-490b-a779-1d18e5ff2265" />
-<img width="1816" height="863" alt="Screenshot 2025-12-27 155831" src="https://github.com/user-attachments/assets/d776daa5-5995-4f07-953e-1e2382b8a3df" />
-<img width="1827" height="884" alt="Screenshot 2025-12-27 155758" src="https://github.com/user-attachments/assets/f8cb4aa8-b01c-4800-9841-e495936a1800" />
-<img width="1600" height="850" alt="image" src="https://github.com/user-attachments/assets/13e8b7f6-9e9d-4e66-9800-d74c9c9502c2" />
+
+<img width="1827" height="884" alt="Screenshot 2025-12-27 155758" src="https://github.com/user-attachments/assets/df7b8e87-5fd9-41a1-8648-c955138bb830" />
 
 
 
