@@ -91,8 +91,8 @@ PDA College of Engineering
 
 Team Members :
     SALILA S P
-    SONAL M S
-    SWATI S J
+    SONAL M Sangapur 
+    SWATI J Sajjan
 
 ***
 
