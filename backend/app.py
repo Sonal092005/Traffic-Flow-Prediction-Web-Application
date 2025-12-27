@@ -10,6 +10,12 @@ import os
 # -------------------------------
 model_dir = os.path.join(os.path.dirname(__file__), "model")
 
+scaler_X_path = os.path.join(model_dir, "scaler_X.pkl")
+scaler_y_path = os.path.join(model_dir, "scaler_y.pkl")
+
+scaler_X = joblib.load(scaler_X_path) if os.path.exists(scaler_X_path) else None
+scaler_y = joblib.load(scaler_y_path) if os.path.exists(scaler_y_path) else None
+
 # -------------------------------
 # LSTM Model Definition
 # -------------------------------
@@ -24,15 +30,15 @@ class LSTMModel(nn.Module):
         return self.fc(hn[-1])
 
 # -------------------------------
-# Load scalers & model
+# Load model (ONLY valid file)
 # -------------------------------
-scaler_X = joblib.load(os.path.join(model_dir, "scaler_X.pkl"))
-scaler_y = joblib.load(os.path.join(model_dir, "scaler_y.pkl"))
+model_path = os.path.join(model_dir, "traffic_lstm.pth")
+
+if not os.path.exists(model_path):
+    raise FileNotFoundError("traffic_lstm.pth not found")
 
 model = LSTMModel(input_dim=3)
-model.load_state_dict(
-    torch.load(os.path.join(model_dir, "traffic_lstm.pth"), map_location="cpu")
-)
+model.load_state_dict(torch.load(model_path, map_location="cpu"))
 model.eval()
 
 LOOKBACK = 3
@@ -52,7 +58,6 @@ JUNCTION_MAP = {
     8: "J8 – Airport Road Trumpet Junction",
 }
 
-# Junctions you want to keep under 20
 LOW_CAP_JUNCTIONS = {0, 1, 2}
 
 # -------------------------------
@@ -83,35 +88,35 @@ def predict():
     weekday = int(data.get("weekday", 0))
     junction = int(data.get("junction", 0))
 
-    # Input validation
     if not (0 <= hour <= 23 and 0 <= weekday <= 6 and 0 <= junction <= 8):
         return jsonify({"error": "Invalid input range"}), 400
 
-    # Prepare features
+    # Prepare input
     X = np.array([[hour, weekday, junction]], dtype=float)
-    X_scaled = scaler_X.transform(X)
 
-    # Create pseudo-sequence: shape (batch, seq_len, features)
+    if scaler_X is not None:
+        X_scaled = scaler_X.transform(X)
+    else:
+        X_scaled = X
+
     X_seq = np.repeat(X_scaled[np.newaxis, :, :], LOOKBACK, axis=1)
     X_torch = torch.tensor(X_seq, dtype=torch.float32)
 
-    # Model prediction (scaled)
     with torch.no_grad():
         pred_scaled = model(X_torch).item()
 
-    # Back to original scale
-    pred = scaler_y.inverse_transform([[pred_scaled]])[0][0]
+    if scaler_y is not None:
+        pred = scaler_y.inverse_transform([[pred_scaled]])[0][0]
+    else:
+        pred = pred_scaled
 
-    # Bound output 0–40
     pred = max(0, min(40, pred))
 
-    # Force some junctions to be below 20 (heuristic)
     if junction in LOW_CAP_JUNCTIONS:
         pred = min(pred, 20)
 
     pred = round(pred)
 
-    # Traffic level categories
     if pred == 0:
         level = "No Traffic"
     elif pred <= 20:
@@ -123,25 +128,18 @@ def predict():
     else:
         level = "Peak"
 
-    junction_name = JUNCTION_MAP.get(junction, f"Junction {junction}")
-
     weekday_names = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-    weekday_str = (
-        weekday_names[weekday] if 0 <= weekday < len(weekday_names) else str(weekday)
-    )
-    time_label = f"{weekday_str} {hour:02d}:00"
+    weekday_str = weekday_names[weekday]
 
-    return jsonify(
-        {
-            "predicted_traffic": float(pred),
-            "traffic_level": level,
-            "junction_id": junction,
-            "junction_name": junction_name,
-            "hour": hour,
-            "weekday": weekday,
-            "time_label": time_label,
-        }
-    )
+    return jsonify({
+        "predicted_traffic": float(pred),
+        "traffic_level": level,
+        "junction_id": junction,
+        "junction_name": JUNCTION_MAP.get(junction),
+        "hour": hour,
+        "weekday": weekday,
+        "time_label": f"{weekday_str} {hour:02d}:00"
+    })
 
 if __name__ == "__main__":
     app.run(debug=True)
