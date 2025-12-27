@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Traffic Flow Prediction - AI Powered</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Modern fonts for stunning headings -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+<div class="main-scroll-container">
+    <!-- Welcome Section -->
+    <section class="section-fullscreen" id="welcome">
+        <span class="welcome-text">Welcome !</span>
+    </section>
+
+    <!-- App Main Title -->
+    <section class="section-fullscreen" id="title-section">
+        <div class="header">
+            <h1>🚦 Traffic Flow Prediction</h1>
+            <h3>Smart, Real-Time, AI-driven Forecasts</h3>
+        </div>
+    </section>
+
+    <!-- Inputs and Predict -->
+    <section class="section-fullscreen" id="input-section">
+        <div class="input-section">
+            <h2>Predict Traffic Flow</h2>
+            <form id="predictForm">
+                <input type="number" name="hour" id="hour" placeholder="Hour (0-23)" min="0" max="23" required>
+                <input type="number" name="weekday" id="weekday" placeholder="Weekday (0-6)" min="0" max="6" required>
+                <input type="number" name="junction" id="junction" placeholder="Junction (integer)" min="0" max="8"required>
+                <button type="submit" class="glow-btn" style="width:100%;margin-top:1.2em;">Predict Flow</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Prediction Output and Graph -->
+    <section class="section-fullscreen" id="output-section">
+        <div class="result-section" id="resultSection"></div>
+        <div class="chart-container">
+            <canvas id="trafficChart" width="450" height="180"></canvas>
+        </div>
+        <div class="download-section">
+            <button class="glow-btn" id="downloadPredictions" style="width:100%;">Download Prediction Data</button>
+        </div>
+    </section>
+
+    <!-- Footer / Developer Section -->
+    <section class="section-fullscreen" id="footer-section" style="align-items:center;">
+        <div class="footer-section">
+            Developed by <strong>Salila and Team</strong> | Final Year Information Science Engineering<br>
+            PDA College &copy; 2025<br>
+            <span style="font-size:1.9rem;">📝</span>
+        </div>
+    </section>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="scripts/app.js"></script>
+</body>
+</html>
+
