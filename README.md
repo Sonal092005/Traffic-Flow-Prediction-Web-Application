@@ -73,6 +73,8 @@ This project demonstrates how deep learning (LSTM) and machine learning can turn
 ## OUTPUT
 
 <img width="1827" height="884" alt="Screenshot 2025-12-27 155758" src="https://github.com/user-attachments/assets/df7b8e87-5fd9-41a1-8648-c955138bb830" />
+<img width="1816" height="863" alt="Screenshot 2025-12-27 155831" src="https://github.com/user-attachments/assets/18c69ea8-e039-4831-b78a-33e7c63cf7c8" />
+
 
 
 
