@@ -3,17 +3,31 @@
 
 This project demonstrates how deep learning (LSTM) and machine learning can turn raw, time-series traffic data into actionable traffic flow predictions. Built as a modular, real-time web application, it is designed to aid urban congestion management and smart mobility use cases.
 
-## Features
+## 🔗 Live Demo
+https://traffic-flow-prediction-web-application.onrender.com
 
-- Predicts hourly or daily traffic volume for a city junction using historic sensor data
-- Built with PyTorch, Flask API, and a modern web frontend
-- LSTM neural network captures temporal trends in traffic flow
-- Automated data preprocessing and model deployment for repeatability
+## 🚀 Deployment
+- Backend: Flask (Python)
+- ML Model: LSTM (PyTorch)
+- Web Server: Gunicorn
+- Hosting Platform: Render
+- Frontend: HTML, CSS, JavaScript
+  
+## ✨ Features
+
+- Traffic flow prediction using an LSTM deep learning model
+- Predicts hourly traffic volume for city junctions using historical sensor data
+- LSTM neural network captures temporal patterns and traffic trends
+- Real-time predictions exposed via a REST API
+- Interactive web-based user interface
+- Built using PyTorch, Flask, and modern web technologies
+- Automated data preprocessing and repeatable model deployment
+- Deployed online and publicly accessible
 
 ## Dataset
 
-- Single time-series dataset (sample generated related to Banglore Traffic)
-- Includes: Hour, weekday, weather info, and historic vehicle count per time interval
+- Single time-series dataset (sample generated related to Bangalore Traffic)
+- Includes: Hour, weekday, junction ID, and historic vehicle count
 
 ## Technologies Used
 
@@ -24,15 +38,20 @@ This project demonstrates how deep learning (LSTM) and machine learning can turn
 - **HTML/CSS/JavaScript** (frontend)
 
 ## Project Structure
-
 ```
+├── backend/
+│   ├── app.py                         # Flask API
+│   ├── data_preprocessing_and_training.py
+│   └── model/
+│       └── traffic_lstm.pth
+├── frontend/
+│   ├── index.html
+│   ├── main.css
+│   └── scripts/
+│       └── app.js
 ├── data/
-│   └── traffic_data.csv
-├── model/
-│   └── lstm_model.pth
-├── app.py            # Flask API
-├── preprocess.py     # Data cleaning & feature engineering
-├── static/           # Frontend static files
+│   └── bangalore_traffic_dataset_lstm.csv
+├── requirements.txt
 └── README.md
 ```
 
@@ -67,7 +86,7 @@ This project demonstrates how deep learning (LSTM) and machine learning can turn
 
 ## Applications & Extensions
 
-- Scalable for multiple junctions, bigger datasets, or extra features (weather, holidays, accidents, etc.)
+- Scalable for multiple junctions, bigger datasets, or extra features (holidays, accidents, etc.)
 - Can deploy to the cloud or a local server
 
 ## OUTPUT
@@ -76,9 +95,6 @@ This project demonstrates how deep learning (LSTM) and machine learning can turn
 <img width="1816" height="863" alt="Screenshot 2025-12-27 155831" src="https://github.com/user-attachments/assets/18c69ea8-e039-4831-b78a-33e7c63cf7c8" />
 <img width="1827" height="855" alt="Screenshot 2025-12-27 155915" src="https://github.com/user-attachments/assets/426a0efa-43c0-4b67-bd4e-83d484767177" />
 <img width="1600" height="850" alt="image" src="https://github.com/user-attachments/assets/0ee4a21b-0ac0-4fee-b182-1ef858f0ee14" />
-
-
-
 
 ## License
 
