@@ -75,7 +75,7 @@ This project demonstrates how deep learning (LSTM) and machine learning can turn
 <img width="1827" height="884" alt="Screenshot 2025-12-27 155758" src="https://github.com/user-attachments/assets/df7b8e87-5fd9-41a1-8648-c955138bb830" />
 <img width="1816" height="863" alt="Screenshot 2025-12-27 155831" src="https://github.com/user-attachments/assets/18c69ea8-e039-4831-b78a-33e7c63cf7c8" />
 <img width="1827" height="855" alt="Screenshot 2025-12-27 155915" src="https://github.com/user-attachments/assets/426a0efa-43c0-4b67-bd4e-83d484767177" />
-
+<img width="1600" height="850" alt="image" src="https://github.com/user-attachments/assets/0ee4a21b-0ac0-4fee-b182-1ef858f0ee14" />
 
 
 
