@@ -261,7 +261,7 @@ def predict():
 
     # City-specific traffic patterns
     if city == "kalaburagi" and junction == 0:  # Timapuri
-        if weekday == 6:  # Sunday - Low traffic all day
+        if weekday == 0:  # Sunday - Low traffic all day
             pred = min(pred, 10)
         elif weekday >= 1 and weekday <= 5:  # Mon-Sat
             if 8 <= hour <= 9:  # 8:30 AM to 9:30 AM - High
@@ -276,7 +276,7 @@ def predict():
                 pred = min(pred, 10)
     
     if city == "kalaburagi" and junction == 1:  # Ram Mandir Circle
-        if weekday == 6:  # Sunday - Moderate traffic all day
+        if weekday == 0:  # Sunday - Moderate traffic all day
             pred = max(15, min(pred, 20))
         elif 9 <= hour <= 12:  # 9 AM to 1 PM - High
             pred = max(pred, 26)
@@ -288,7 +288,7 @@ def predict():
             pred = min(pred, 10)
     
     if city == "kalaburagi" and junction == 2:  # Jagat Circle
-        if weekday == 6:  # Sunday - Low traffic all day
+        if weekday == 0:  # Sunday - Low traffic all day
             pred = min(pred, 10)
         elif hour == 9:  # 9 AM to 10 AM - High
             pred = max(pred, 26)
@@ -300,7 +300,7 @@ def predict():
             pred = max(15, min(pred, 20))
     
     if city == "kalaburagi" and junction == 3:  # Super Market
-        if weekday == 6:  # Sunday - Moderate traffic all day
+        if weekday == 0:  # Sunday - Moderate traffic all day
             pred = max(15, min(pred, 20))
         elif 12 <= hour <= 19:  # 12 PM to 8 PM - High
             pred = max(pred, 26)
@@ -310,7 +310,7 @@ def predict():
             pred = min(pred, 10)
     
     if city == "kalaburagi" and junction == 4:  # Kharge
-        if weekday == 6:  # Sunday - Moderate traffic all day
+        if weekday == 0:  # Sunday - Moderate traffic all day
             pred = max(15, min(pred, 20))
         elif 9 <= hour <= 20:  # 9 AM to 9 PM - High
             pred = max(pred, 26)
@@ -320,7 +320,7 @@ def predict():
             pred = min(pred, 10)
     
     if city == "kalaburagi" and junction == 5:  # Aland Check Post
-        if weekday == 6:  # Sunday - Low traffic all day
+        if weekday == 0:  # Sunday - Low traffic all day
             pred = min(pred, 10)
         elif 11 <= hour <= 17:  # 11 AM to 6 PM - High
             pred = max(pred, 26)
@@ -332,7 +332,7 @@ def predict():
             pred = max(15, min(pred, 20))
     
     if city == "kalaburagi" and junction == 6:  # Humnabad Ring Road
-        if weekday == 6:  # Sunday - Moderate traffic all day
+        if weekday == 0:  # Sunday - Moderate traffic all day
             pred = max(15, min(pred, 20))
         elif 10 <= hour <= 21:  # 10 AM to 10 PM - High
             pred = max(pred, 26)
@@ -344,7 +344,7 @@ def predict():
             pred = max(15, min(pred, 20))
     
     if city == "kalaburagi" and junction == 7:  # University
-        if weekday == 6:  # Sunday - Moderate traffic all day
+        if weekday == 0:  # Sunday - Moderate traffic all day
             pred = max(15, min(pred, 20))
         elif 9 <= hour <= 20:  # 9 AM to 9 PM - High
             pred = max(pred, 26)
@@ -354,22 +354,26 @@ def predict():
             pred = min(pred, 10)
 
     # Domain heuristics to bias results by time/weekday
-    if weekday == 0 and 6 <= hour <= 11:  # Sunday morning outings
-        pred = max(pred, 30)
-    elif 6 <= hour <= 11:  # Weekday mornings are busy
-        pred = max(pred, 25)
-    elif 17 <= hour <= 21:  # Post-work/early night rush
-        pred = max(pred, 25)
-    elif hour >= 22 or hour <= 4:  # Late night
-        pred = min(pred, 12)
-    elif 12 <= hour <= 16:  # Afternoon tends to be moderate
-        pred = max(pred, 18)
+    # Do not override explicit Kalaburagi Sunday rules requested by user
+    if not (city == "kalaburagi" and weekday == 0):
+        if weekday == 0 and 6 <= hour <= 11:  # Sunday morning outings
+            pred = max(pred, 30)
+        elif 6 <= hour <= 11:  # Weekday mornings are busy
+            pred = max(pred, 25)
+        elif 17 <= hour <= 21:  # Post-work/early night rush
+            pred = max(pred, 25)
+        elif hour >= 22 or hour <= 4:  # Late night
+            pred = min(pred, 12)
+        elif 12 <= hour <= 16:  # Afternoon tends to be moderate
+            pred = max(pred, 18)
 
     high_bias = config.get("high_bias", set())
     low_cap = config.get("low_cap", set())
 
+    # Avoid forcing High bias on Kalaburagi Sundays per user rules
     if junction in high_bias and (6 <= hour <= 11 or 17 <= hour <= 21):
-        pred = max(pred, 30)
+        if not (city == "kalaburagi" and weekday == 0):
+            pred = max(pred, 30)
 
     if junction in low_cap:
         pred = min(pred, 20)
