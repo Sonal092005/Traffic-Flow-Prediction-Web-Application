@@ -1,111 +1,182 @@
 
-# Traffic Flow Prediction Using LSTM (Single Dataset Approach)
+🚦 Traffic Flow Prediction Web Application
 
-This project demonstrates how deep learning (LSTM) and machine learning can turn raw, time-series traffic data into actionable traffic flow predictions. Built as a modular, real-time web application, it is designed to aid urban congestion management and smart mobility use cases.
+Live Demo: https://traffic-flow-prediction-web-application.onrender.com
 
-## 🔗 Live Demo
+A full-stack web application that forecasts traffic flow and congestion levels for major Indian cities using LSTM deep learning models. Designed for practical use, research, and intelligent decision-making.
+
+🔍 Project Overview
+
+Traffic congestion is a major challenge in urban environments, leading to delays, fuel waste, and environmental impact. This application uses time-series traffic data and deep learning techniques (LSTM) to predict future traffic flow based on user-provided date, time, and location.
+
+It delivers:
+
+- Numerical traffic predictions
+
+- Categorical traffic level (Low / Moderate / High)
+
+- Downloadable prediction results
+
+- The app is deployed using Render with auto-deploy via GitHub.
+
+⚙️ Live Application
+
+🔗 Access the application here:
 https://traffic-flow-prediction-web-application.onrender.com
 
-## 🚀 Deployment
-- Backend: Flask (Python)
-- ML Model: LSTM (PyTorch)
-- Web Server: Gunicorn
-- Hosting Platform: Render
-- Frontend: HTML, CSS, JavaScript
-  
-## ✨ Features
+Try it out by selecting:
 
-- Traffic flow prediction using an LSTM deep learning model
-- Predicts hourly traffic volume for city junctions using historical sensor data
-- LSTM neural network captures temporal patterns and traffic trends
-- Real-time predictions exposed via a REST API
-- Interactive web-based user interface
-- Built using PyTorch, Flask, and modern web technologies
-- Automated data preprocessing and repeatable model deployment
-- Deployed online and publicly accessible
+- City
 
-## Dataset
+- Location
 
-- Single time-series dataset (sample generated related to Bangalore Traffic)
-- Includes: Hour, weekday, junction ID, and historic vehicle count
+- Date & Time
 
-## Technologies Used
 
-- **Python 3.x**
-- **PyTorch** (deep learning)
-- **Flask** (API & backend)
-- **pandas, scikit-learn, joblib** (data cleaning, feature engineering, serialization)
-- **HTML/CSS/JavaScript** (frontend)
+Then submit to view predicted traffic flow.
 
-## Project Structure
-```
+🧠 Features
+
+✔ Deep learning–based traffic prediction using LSTM
+✔ Prediction of traffic level (Low / Moderate / High)
+✔ Interactive UI with responsive design
+✔ Download prediction data (CSV)
+✔ Cloud deployment with auto-deploy
+✔ Lightweight and scalable
+
+🧰 Tech Stack
+
+- Frontend
+
+- HTML
+
+- CSS
+
+- JavaScript
+
+- Backend
+
+- Python
+
+- Flask
+
+- Gunicorn
+
+- Machine Learning
+
+- LSTM models (PyTorch)
+
+- NumPy, Pandas
+
+- Deployment
+
+- GitHub (source control)
+
+- Render (hosting & auto-deploy)
+
+📁 Repository Structure
+Traffic-Flow-Prediction-Web-Application/
+│
 ├── backend/
-│   ├── app.py                         # Flask API
-│   ├── data_preprocessing_and_training.py
-│   └── model/
-│       └── traffic_lstm.pth
+│   ├── app.py
+│   ├── model/
+│   │   └── traffic_lstm_*.pth
+│   ├── train_*.py
+│
 ├── frontend/
 │   ├── index.html
 │   ├── main.css
 │   └── scripts/
 │       └── app.js
+│
 ├── data/
-│   └── bangalore_traffic_dataset_lstm.csv
+│   └── *_traffic_dataset_lstm.csv
+│
 ├── requirements.txt
-└── README.md
-```
+├── README.md
+└── .gitignore
 
-## How to Run
+🛠️ Local Setup (Optional)
 
-1. Clone the repository and install dependencies:
-    ```
-    pip install -r requirements.txt
-    ```
+If you want to run the project locally:
 
-2. Preprocess the data:
-    ```
-    python preprocess.py
-    ```
+1. Clone the repository
 
-3. Train or load the LSTM model:
-    ```
-    python train.py
-    ```
 
-4. Run the Flask API:
-    ```
-    python app.py
-    ```
+git clone https://github.com/Sonal092005/Traffic-Flow-Prediction-Web-Application.git
+cd Traffic-Flow-Prediction-Web-Application
 
-5. Access the web app via `localhost:5000` in your browser.
+2. Create and activate a virtual environment
 
-## Usage
+python -m venv venv
+# On Windows
+venv\Scripts\activate
+# On macOS/Linux
+source venv/bin/activate
 
-- Enter hour, weekday, and (optionally) weather info via the web frontend.
-- View predicted traffic flow instantly.
+3. Install dependenciesents.txt
 
-## Applications & Extensions
+4. Run the application
+python backend/app.py
 
-- Scalable for multiple junctions, bigger datasets, or extra features (holidays, accidents, etc.)
-- Can deploy to the cloud or a local server
 
-## OUTPUT
+Open your browser at:
 
-<img width="1827" height="884" alt="Screenshot 2025-12-27 155758" src="https://github.com/user-attachments/assets/df7b8e87-5fd9-41a1-8648-c955138bb830" />
-<img width="1816" height="863" alt="Screenshot 2025-12-27 155831" src="https://github.com/user-attachments/assets/18c69ea8-e039-4831-b78a-33e7c63cf7c8" />
-<img width="1827" height="855" alt="Screenshot 2025-12-27 155915" src="https://github.com/user-attachments/assets/426a0efa-43c0-4b67-bd4e-83d484767177" />
-<img width="1600" height="850" alt="image" src="https://github.com/user-attachments/assets/0ee4a21b-0ac0-4fee-b182-1ef858f0ee14" />
+http://127.0.0.1:5000/
 
-## License
+🧠 Model Details
 
-MIT License
+LSTM 
+🧠 Model Details
 
-Team Members :
-    SALILA S PUNNESHETTY
-    SONAL M SANGAPUR
-    SWATI J SAJJAN
+LSTM (Long Short-Term Memory) models are trained on historical traffic data for cities such as:
 
-Information Science Engineering Student,
-PDA College of Engineering
-***
+= Hyderabad
 
+- Delhi
+
+- Mumbai
+
+- Pune
+
+- Kolkata
+
+- Kalaburagi
+
+Models are stored in the backend/model/ directory and loaded dynamically by the Flask server.
+
+📊 Usage Guide
+
+- Open the app in your browser
+
+- Select a city and location
+
+- Choose date and time
+
+- Click Predict
+
+- View output — predicted traffic flow value & traffic level
+
+Optional: Click Download Prediction Data to save results
+
+📈 Future Improvements
+
+🚀 Real-time traffic API integration
+📍 Map-based visualization
+📱 Mobile-responsive design tweaks
+🔐 User accounts and saved prediction history
+📊 Data charts & trend analytics
+
+👩‍💻 Author
+
+Sonal M Sangapur
+B.E. – Information Science & Engineering
+PDA College of Engineering, Kalaburagi
+
+📧: sangapursonal@gmail.com
+
+GitHub: https://github.com/Sonal092005
+
+📜 License
+
+This project is licensed under the MIT License — free to use, modify, and distribute.
