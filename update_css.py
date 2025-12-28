@@ -1,4 +1,4 @@
-html, body {
+css_content = """html, body {
     height: 100%;
     scroll-behavior: smooth;
 }
@@ -239,23 +239,28 @@ body {
 
 /* Spinner animation */
 .spinner {
-    border: 5px solid rgba(250, 139, 255, 0.2);
-    border-top: 5px solid #FA8BFF;
-    border-right: 5px solid #2BD2FF;
-    border-bottom: 5px solid #2BFF88;
+    border: 4px solid rgba(0, 212, 255, 0.2);
+    border-top: 4px solid #00d4ff;
     border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    animation: spin 1s linear infinite, colorShift 3s ease infinite;
-    margin: 25px auto;
+    width: 45px;
+    height: 45px;
+    animation: spin 1s linear infinite;
+    margin: 22px auto;
 }
 
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+"""
 
-@keyframes colorShift {
-    0%, 100% { filter: drop-shadow(0 0 10px #FA8BFF); }
-    33% { filter: drop-shadow(0 0 10px #2BD2FF); }
-    66% { filter: drop-shadow(0 0 10px #2BFF88); }
+with open('frontend/main.css', 'w', encoding='utf-8') as f:
+    f.write(css_content)
+    
+print("CSS file updated with clean professional design!")
+print("The design now has:")
+print("- Dark elegant gradient background (teal/gray tones)")
+print("- Cyan accent color (#00d4ff)")
+print("- Subtle glow effects")
+print("- Smooth animations")
+print("- Professional glassmorphism cards")

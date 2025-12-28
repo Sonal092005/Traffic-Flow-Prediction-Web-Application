@@ -1,32 +1,5 @@
-// Initialize chart and history
-let trafficChart = null;
+// Prediction history only (chart removed)
 let predictionHistory = [];
-
-// Initialize Chart.js
-const ctx = document.getElementById('trafficChart').getContext('2d');
-trafficChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: [],
-        datasets: [{
-            label: 'Traffic Flow',
-            data: [],
-            borderColor: '#08d9d6',
-            backgroundColor: 'rgba(8, 217, 214, 0.1)',
-            borderWidth: 2,
-            tension: 0.4
-        }]
-    },
-    options: {
-        responsive: true,
-        scales: {
-            y: {
-                beginAtZero: true,
-                max: 40
-            }
-        }
-    }
-});
 
 // Download button functionality
 document.getElementById('downloadPredictions').addEventListener('click', function () {
@@ -47,6 +20,7 @@ document.getElementById('downloadPredictions').addEventListener('click', functio
 // Form submission
 document.getElementById('predictForm').addEventListener('submit', function (e) {
     e.preventDefault();
+    const city = document.getElementById('city').value;
     const hour = document.getElementById('hour').value;
     const weekday = document.getElementById('weekday').value;
     const junction = document.getElementById('junction').value;
@@ -62,6 +36,7 @@ document.getElementById('predictForm').addEventListener('submit', function (e) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+            city,
             hour: Number(hour),
             weekday: Number(weekday),
             junction: Number(junction)
@@ -76,6 +51,7 @@ document.getElementById('predictForm').addEventListener('submit', function (e) {
             const level = res.traffic_level;
             const junctionName = res.junction_name;
             const timeLabel = res.time_label;
+            const cityName = res.city || city;
 
             resultSection.innerHTML = `
                 <h2>Predicted Traffic Flow</h2>
@@ -86,24 +62,16 @@ document.getElementById('predictForm').addEventListener('submit', function (e) {
                     Level: <strong>${level}</strong>
                 </p>
                 <p style="font-size:1rem;color:#cccccc;margin:0.2rem 0;">
-                    ${junctionName} &nbsp; | &nbsp; ${timeLabel}
+                    ${cityName} &nbsp; | &nbsp; ${junctionName} &nbsp; | &nbsp; ${timeLabel}
                 </p>
             `;
 
             let now = new Date().toLocaleTimeString();
-            if (trafficChart) {
-                trafficChart.data.labels.push(now);
-                trafficChart.data.datasets[0].data.push(Number(pred));
-
-                if (trafficChart.data.labels.length > 10) {
-                    trafficChart.data.labels.shift();
-                    trafficChart.data.datasets[0].data.shift();
-                }
-                trafficChart.update();
-            }
 
             predictionHistory.push({
                 timestamp: now,
+                city: cityName,
+                city: cityName,
                 hour,
                 weekday,
                 junction,

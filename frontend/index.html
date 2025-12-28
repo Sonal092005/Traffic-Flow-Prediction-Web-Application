@@ -28,10 +28,20 @@
         <div class="input-section">
             <h2>Predict Traffic Flow</h2>
             <form id="predictForm">
+                <select name="city" id="city" aria-label="City" required>
+                    <option value="" disabled selected>City</option>
+                    <option value="bangalore">Bangalore</option>
+                    <option value="kalaburagi">Kalaburagi</option>
+                    <option value="mumbai">Mumbai</option>
+                    <option value="hyderabad">Hyderabad</option>
+                    <option value="pune">Pune</option>
+                    <option value="delhi">Delhi</option>
+                    <option value="kolkata">Kolkata</option>
+                </select>
                 <input type="number" name="hour" id="hour" placeholder="Hour (0-23)" min="0" max="23" required>
                 <input type="number" name="weekday" id="weekday" placeholder="Weekday (0-6)" min="0" max="6" required>
-                <input type="number" name="junction" id="junction" placeholder="Junction (integer)" min="0" max="8"required>
-                <button type="submit" class="glow-btn" style="width:100%;margin-top:1.2em;">Predict Flow</button>
+                <input type="number" name="junction" id="junction" placeholder="Junction (0-7)" min="0" max="7" required>
+                <button type="submit" class="glow-btn full-width mt-1-2">Predict Flow</button>
             </form>
         </div>
     </section>
@@ -39,25 +49,21 @@
     <!-- Prediction Output and Graph -->
     <section class="section-fullscreen" id="output-section">
         <div class="result-section" id="resultSection"></div>
-        <div class="chart-container">
-            <canvas id="trafficChart" width="450" height="180"></canvas>
-        </div>
         <div class="download-section">
-            <button class="glow-btn" id="downloadPredictions" style="width:100%;">Download Prediction Data</button>
+            <button class="glow-btn full-width" id="downloadPredictions">Download Prediction Data</button>
         </div>
     </section>
 
     <!-- Footer / Developer Section -->
-    <section class="section-fullscreen" id="footer-section" style="align-items:center;">
+    <section class="section-fullscreen" id="footer-section">
         <div class="footer-section">
-            Developed by <strong>Salila and Team</strong> | Final Year Information Science Engineering<br>
-            PDA College &copy; 2025<br>
-            <span style="font-size:1.9rem;">📝</span>
+            Developed by <strong>Salila Punneshetty</strong> | <strong>Sonal M Sangapur</strong> | <strong>Swati Sajjan</strong><br>
+            Information Science and Engineering<br>
+            PDA College of Engineering
         </div>
     </section>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="scripts/app.js"></script>
 </body>
 </html>

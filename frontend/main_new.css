@@ -1,0 +1,11 @@
+html, body { 
+    height: 100%; 
+    scroll-behavior: smooth; 
+} 
+body { 
+    background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%); 
+    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif; 
+    margin: 0; 
+    padding: 0; 
+    min-height: 100vh; 
+}
